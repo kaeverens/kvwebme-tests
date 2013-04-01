@@ -111,7 +111,7 @@ function testCoverageDirectory($dir) {
 		}
 	}
 }
-testCoverageDirectory($run_dir.'/trunk');
+testCoverageDirectory($run_dir.'/kvwebme');
 
 $coverage=100*$lines_covered/$lines_in_total;
 $largest_offender_coverage*=100;

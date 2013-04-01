@@ -15,9 +15,9 @@ function rrmdir($dir) {
 	reset($objects);
 	rmdir($dir);
 }
-rrmdir($run_dir.'/trunk');
-if (file_exists($run_dir.'/trunk')) {
-	echo '{"errors":"could not remove trunk"}';
+rrmdir($run_dir.'/kvwebme');
+if (file_exists($run_dir.'/kvwebme')) {
+	echo '{"errors":"could not remove kvwebme"}';
 	exit;
 }
 rrmdir($run_dir.'/files');

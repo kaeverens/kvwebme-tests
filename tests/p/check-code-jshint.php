@@ -53,18 +53,16 @@ function checkJs($rootdir) {
 			continue;
 		}
 		$fileToCheck=$rootdir.'/'.$fname;
-		$opts='curly=true,quotmark=single,undef=true,unused=true,trailing=true'
-			.',maxdepth=4,maxstatements=40,maxcomplexity=10,browser=true,jquery=true'
-			.',maxerr=40';
-		$result=shell_exec("../../jshint/jshint-rhino.js $fileToCheck $opts");
-		$arr=array($fileToCheck, count(explode("\n", $result))/2);
+		$opts=' --config='.dirname(__FILE__).'/../../jshint/jshint.js';
+		$result=shell_exec("jshint $fileToCheck $opts");
+		$arr=array($fileToCheck, count(explode("\n", $result)));
 		if ($arr[1]==0) {
 			continue;
 		}
 		$errors[]=$arr;
 	}
 }
-checkJs(realpath('../../run/trunk'));
+checkJs(realpath('../../run/kvwebme'));
 $total=0;
 $biggest_offender='';
 $biggest_offender_num=0;

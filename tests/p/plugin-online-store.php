@@ -42,7 +42,7 @@ $file=Curl_get('http://kvwebmerun/a/f=adminPluginsGetInstalled');
 $expected='{"panels":{"name":"Panels","description":"Allows content section'
 	.'s to be displayed throughout the site.","version":5}'
 	.',"online-store":{"name":"Online Store","description":"Add online-shopping'
-	.' capabilities to some plugins.","version":"16"}'
+	.' capabilities to some plugins.","version":"18"}'
 	.'}';
 if ($expected!=$file) {
 	die(
@@ -662,6 +662,20 @@ if (strpos($file, 'value="0" selected="selected">All products')===false) {
 	die('{"errors":"failed to load OnlineStore edit page (after Wizard)"}');
 }
 // }
+// }
+// { test emails page
+$file=Curl_get(
+	'http://kvwebmerun/ww.admin/plugin.php?_plugin=online-store&_page=emails'
+);
+$expected='Subject of the email';
+if (strpos($file, $expected)===false) {
+	die(
+		json_encode(array(
+			'errors'=>
+				'expected: '.$expected.'<br/>actual: '.$file
+		))
+	);
+}
 // }
 // { remove pages
 $file=Curl_get('http://kvwebmerun/a/f=adminPageDelete/id=3');

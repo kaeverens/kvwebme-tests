@@ -3,15 +3,15 @@ $expected=251; // acceptable number of issues
 
 require_once '../config.php';
 $run_dir=realpath('../../run');
-$files_to_check="$run_dir/trunk/index.php"
-	." $run_dir/trunk/install"
-	." $run_dir/trunk/ww.admin"
-	." $run_dir/trunk/ww.css/all.php"
-	." $run_dir/trunk/ww.incs/*php"
-	." $run_dir/trunk/ww.php_classes"
-	." $run_dir/trunk/ww.plugins"
+$files_to_check="$run_dir/kvwebme/index.php"
+	." $run_dir/kvwebme/install"
+	." $run_dir/kvwebme/ww.admin"
+	." $run_dir/kvwebme/ww.css/all.php"
+	." $run_dir/kvwebme/ww.incs/*php"
+	." $run_dir/kvwebme/ww.php_classes"
+	." $run_dir/kvwebme/ww.plugins"
 	;
-$res=shell_exec("phpcs --extensions=php --standard=../../../phpcs-standards/WebME/ruleset.xml --report=summary $files_to_check");
+$res=shell_exec("phpcs --extensions=php --standard=../../phpcs-standards/WebME/ruleset.xml --report=summary $files_to_check");
 $lines=explode("\n", $res);
 $total=0;
 $biggest_offender='';

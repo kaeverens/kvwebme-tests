@@ -44,7 +44,7 @@ $file=Curl_get('http://kvwebmerun/a/f=adminPluginsGetInstalled');
 $expected='{"panels":{"name":"Panels","description":"Allows content sections to'
 	.' be displayed throughout the site.","version":5},"online-store-e-conomic":{'
 	.'"name":"Online Store E-conomic plugin","description":"Add e-conomic integra'
-	.'tion to online store.","version":"0"}}';
+	.'tion to online store.","version":"1"}}';
 if ($expected!=$file) {
 	die(
 		json_encode(array(

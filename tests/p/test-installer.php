@@ -124,9 +124,9 @@ if (!$file || strpos($file, 'document.location="/install/step6.php"')===false) {
 }
 // }
 // { add "testmode" flag to config file
-$f=file_get_contents('../../run/trunk/.private/config.php');
+$f=file_get_contents('../../run/kvwebme/.private/config.php');
 file_put_contents(
-	'../../run/trunk/.private/config.php',
+	'../../run/kvwebme/.private/config.php',
 	str_replace(
 		"'username' => 'root',",
 		"'username'=>'root','testmode'=>true,",

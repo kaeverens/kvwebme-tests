@@ -5,7 +5,7 @@ $(function(){
 		['Installer', 'test-installer']
 	]; // }
 	var test2=[ // { put these in whatever order you want
-		['plugin: Issue Tracker', 'plugin-issue-tracker'],
+		['Page-type: Summaries', 'page-summaries'],
 		['Convert FreeCssTemplates Theme', 'convert-freecsstemplate-theme'],
 		['Non-latin page names', 'test-page-non-latin'],
 		['Page Creation', 'test-page-creation'],
@@ -17,10 +17,12 @@ $(function(){
 		['plugin: Backup', 'plugin-backup'],
 		['plugin: Banner Image', 'plugin-banner-image'],
 		['plugin: Blog', 'plugin-blog'],
+		['plugin: Classified Ads', 'plugin-classified-ads'],
 		['plugin: Comments', 'plugin-comments'],
 		['plugin: Forms', 'test-forms'],
 		['plugin: Forum', 'test-forum'],
 		['plugin: Image Gallery', 'test-image-gallery'],
+		['plugin: Issue Tracker', 'plugin-issue-tracker'],
 		['plugin: Mailinglists', 'plugin-mailinglists'],
 		['plugin: Meetings', 'plugin-meetings'],
 		['plugin: Messaging Notifier', 'test-messaging-notifier'],

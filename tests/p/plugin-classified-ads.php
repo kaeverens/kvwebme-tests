@@ -24,9 +24,9 @@ if ($expected!=$file) {
 	);
 }
 // }
-// { add site-credits plugin using InstallOne method (should fail)
-$file=Curl_get('http://kvwebmerun/a/f=adminPluginsInstallOne/name=site-credits');
-$expected='{"ok":0,"message":"Plugin not found"}';
+// { add plugin using InstallOne method
+$file=Curl_get('http://kvwebmerun/a/f=adminPluginsInstallOne/name=classified-ads');
+$expected='{"ok":1,"added":["classified-ads"],"removed":[]}';
 if (strpos($file, $expected)===false) {
 	die(
 		json_encode(array(
@@ -37,15 +37,11 @@ if (strpos($file, $expected)===false) {
 }
 $file=Curl_get('http://kvwebmerun/a/f=nothing');
 // }
-// { so we add it by hand...
-$config=file_get_contents('../../run/kvwebme/.private/config.php');
-$config=str_replace("'panels'", "'panels,site-credits'", $config);
-file_put_contents('../../run/kvwebme/.private/config.php', $config);
-// }
 // { check current list of installed plugins
 $file=Curl_get('http://kvwebmerun/a/f=adminPluginsGetInstalled');
 $expected='{"panels":{"name":"Panels","description":"Allows content sections'
-	.' to be displayed throughout the site.","version":5}}';
+.' to be displayed throughout the site.","version":5},"classified-ads":{"nam'
+.'e":"Classified Ads","description":"Classified Ads","version":8}}';
 if ($expected!=$file) {
 	die(
 		json_encode(array(
@@ -54,9 +50,23 @@ if ($expected!=$file) {
 	);
 }
 // }
-// { ping the api-external API to see what happens
-$file=Curl_get('http://kvwebmerun/ww.plugins/site-credits/api-external.php');
-$expected='{"error":"the site-credits does not have an API key set"}';
+// { check list of customers
+$file=Curl_get('http://kvwebmerun/a/p=classified-ads/f=adminAdsGetDT');
+$expected='[]';
+if (strpos($file, $expected)===false) {
+	die(
+		json_encode(array(
+			'errors'=>'failed to check customers list. expected: '.$expected
+				.'<br/>actual: '.$file
+		))
+	);
+}
+// }
+// { remove plugins
+$file=Curl_get('http://kvwebmerun/a/f=adminPluginsSetInstalled',
+	array('plugins[panels]'=>'on')
+);
+$expected='{"ok":1,"added":[],"removed":["classified-ads"]}';
 if (strpos($file, $expected)===false) {
 	die(
 		json_encode(array(
@@ -65,14 +75,6 @@ if (strpos($file, $expected)===false) {
 		))
 	);
 }
-// }
-// { cleanup
-// { remove site-credit plugin manually
-$config=file_get_contents('../../run/kvwebme/.private/config.php');
-$config=str_replace("'panels,site-credits'", "'panels'", $config);
-file_put_contents('../../run/kvwebme/.private/config.php', $config);
-// }
-Curl_get('http://kvwebmerun/a/f=adminDBClearAutoincrement/table=pages');
 // }
 // { logout
 $file=Curl_get('http://kvwebmerun/a/f=logout', array());
